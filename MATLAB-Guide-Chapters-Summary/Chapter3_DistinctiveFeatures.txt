@@ -1,0 +1,159 @@
+>> diary Chapter3_DistinctiveFeatures_txt
+>> % Bu bölümde MATLAB'i diğer dillerden ayıran 3 temel özellik inceleniyor.
+>> 
+>> % 3.1. Automatic Storage Allocation (Otomatik Bellek Yönetimi)
+>> % MATLAB'de değişkenleri (diziler/vektörler dahil) kullanmadan önce tanımlamaya gerek yoktur. 
+>> % (Dinamik Büyüme): Bir değişken ona atama yaptığın anda (atadığın boyutta) otomatik olarak oluşturulur.
+>> % En önemlisi bir vektör veya matrisin mevcut boyutundan daha büyük bir indekse atama yapılırsa MATLAB o diziyi 
+>> % otomatik olarak genişletir ve aradaki boşlukları 0 ile doldurur.
+>> 
+>> x(3) = 0
+
+x =
+
+     0     0     0
+
+>> % x adında bir değişken olmasa bile >> x(3) = 0 komutu; x=[0 0 0] şeklinde 3 elemanlı bir vektörü anında oluşturur.
+>> 
+>> x(6) = 0
+
+x =
+
+     0     0     0     0     0     0
+
+>> % x şu an [0 0 0] iken >> x(6) = 0 komutu, x=[0 0 0 0 0 0] şeklinde x'i otomatik olarak 6 elemanlı hale getirir.
+>> %---------------------------------------------------------------------------------------------------------------
+>> 
+>> % 3.2. VARIABLE ARGUMENTS LISTS (DEĞİŞKEN ARGÜMAN LİSTELERİ)
+>> % MATLAB fonksiyonları, değişken sayıda girdi ve çıktı alabilir. Bir fonksiyonu çağırırken tüm olası 
+>> % argümanlarını girmek zorunda değilsin. 
+>> % Syntax:
+>> %   - Input: Fonksiyon adınınn sağına "( )" (normal parantez) içine yazılır.
+>> %   - Output: Fonksiyon adının soluna "[ ]" (köşeli parantez) içine yazılır.
+>> 
+>> % norm Fonksiyonu (Input Sayısına Göre)
+>> % "Norm" bir vektörün "büyüklüğünü" veya "uzunluğunu" ölçemin bir yoludur.
+>> %    - norm(x) veya norm(x,2) (2-Norm/L2-Norm)
+>> %        * Anlamı: "Kuş uçuşu mesafe" ya da "öklid normu" (pisagor) olarak bilinir. Vektörün başlangıç noktasından 
+>> %          bitiş noktasına olan fiziksel, düz çizgi uzunluğunu verir.
+>> %        * Formülü: Elemanların karelerinin topla ve karekökünü al. L2=(x1^2 + x2^2 + ...)^(1/2)
+>> x = [3 4]
+
+x =
+
+     3     4
+
+>> norm(x)
+
+ans =
+
+     5
+
+>> %   - norm(x,1) (1-Norm/ L1-Norm)
+>> %       * Anlamı: "Manhattan Mesafesi" ya da "Taksi Mesafesi" olarak bilinir. Vektörün bileşenlerinin 
+>> %         (koordinatlarının) toplam uzunluğunu verir. (Sokaklarda yürür gibi).
+>> %       * Formülü: Elemanların mutlak değerlerini topla. L2=|x1| + |x2| + ...
+>> norm(x,1)
+
+ans =
+
+     7
+
+>> norm(x,2)
+
+ans =
+
+     5
+
+>> norm(x)
+
+ans =
+
+     5
+
+>> % max Fonksiyonu (Output Sayısına Göre)
+>> %   - m = max(x): Sadece en büyük değeri m değişkenine atar.
+>> m = max(x)
+
+m =
+
+     4
+
+>> x
+
+x =
+
+     3     4
+
+>> %   - [m, k] = max(x): Hem en büyük değeri m'ye hem de o değerin indeksini k'ye atar.
+>> [m, k] = max(x)
+
+m =
+
+     4
+
+
+k =
+
+     2
+
+>> % size Fonksiyonu (Output Sayısına Göre)
+>> %    - s = size(A): Matrisin boyutlarını (ör: 5*3) tek bir vektör olarak s değişkenine atar.
+>> A = rand(5,3)
+
+A =
+
+    0.8147    0.0975    0.1576
+    0.9058    0.2785    0.9706
+    0.1270    0.5469    0.9572
+    0.9134    0.9575    0.4854
+    0.6324    0.9649    0.8003
+
+>> s = size(A)
+
+s =
+
+     5     3
+
+>> %    - [m, n] = size(A): Boyutları iki ayrı değişkene atar.
+>> [m, n] = size(A)
+
+m =
+
+     5
+
+
+n =
+
+     3
+
+>> %-------------------------------------------------------------------------------------------------------------
+>> 
+>> % 3.3. COMPLEX ARRAYS AND ARITHMATIC (KARMAŞIK DİZİLER VE ARİTMATİK)
+>> 
+>> % MATLAB'in Temel Veri Türü: MATLAB'deki her şey (bir sayı, bir vektör veya bir matris) temelde çok boyutlu 
+>> % karmalık bir dizidir. 
+>> 
+>> % Depolama: Tüm sayılar (hem gerçel hem de sanal kısımları) double precision floating (çift duyarlılıklı kayan
+>> % nokta) formatında yani yüksek hassasiyetli ondalıklı sayılar olarak saklanır.
+>> 
+>> % Ayrı Gerçel Tür Yoktur!!: C, C++ veya Java gibi dillerin aksine MATLAB'de "gerçel sayı" (reel) için ayrı bir
+>> % veri türü yoktur.
+>> 
+>> % Otomatik Kullanım: 
+>> %  - Eğer bir sayı gerçelse (ör: x=5) MATLAB onun sanal kısmını 0 olarak bilir ama depolamak için extra bir yer 
+>> %    harcamaz.
+>> %  - Eğer bir işleme karmalık sayı girerse (ör: 5+3i) MATLAB sonucu otomatik olarak karmaşık aritmatik 
+>> %    kullanarak hesaplar.
+>> 
+>> % ÖZEL DURUMLAR:
+>> %  - Skaler (Scalar): 1*1 boyutlu bir dizidir.
+>> %  - Vektör (Vector): 1*N boyutlu veya N*1 boyutlu bir dizidir.
+>> %  - Matris (Matrix): M*N boyutlu (iki boyutlu) bir dizidir.
+>> 
+>> % TAMSAYI (INTEGER9 TÜRLERİ: 
+>> % MATLAB'de integer (tamsayı) veri türleri de vardır. Ancak bunlar matematiksel hesaplamadan çok (görüntü işleme 
+>> % gibi) büyük verileri hafızada daha az yer kaplayarak verimli saklamak için kullanılır.
+>> diary off
+
+
