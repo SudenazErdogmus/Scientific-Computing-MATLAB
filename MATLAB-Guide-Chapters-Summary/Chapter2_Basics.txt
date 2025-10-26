@@ -1,0 +1,309 @@
+%{ Bir ifade bir değişkene atanmadığında "ans" değişkeni oluşturulur (veya zaten varsa üzerine yazılır). Tıpklı diğer diller gibi, 
+% bu değişkene de daha sonra referans verilebilir / kullanılabilir.
+(1 + sqrt(5)) / 2
+
+ans =
+
+    1.6180
+
+2^(-53)
+
+ans =
+
+   1.1102e-16
+
+%{ Çoğu programlama dili aksine değişkenler kullanılmadan önce tanımlanmaz bunun yerine atandıkları zaman MATLAB tarafından 
+% oluşturulurlar.
+x = sin(22)
+
+x =
+
+   -0.0089
+
+% Burada x değişkenine sin(22)' yi atadık. Çıktının gösterilmemesi için sonuna noktalı virgül eklenebilir. 
+y = 2*x + exp(-3) / (1+cos(1));
+% Burada sonuç görüntülenmedi ancak bir y değişkeni oluşturulup sonuç y' ye atandı.
+% Virgüller veya noktalı virgüller aynı satırda görünen komutları ayırmak için kullanılabilir. 
+x=2, y=cos(-3), z=3*x*y
+
+x =
+
+     2
+
+
+y =
+
+   -0.9900
+
+
+z =
+
+   -5.9400
+
+x=5; y=cos(.5); z=x*y^2
+
+z =
+
+    3.8508
+
+% MATLAB case sensitive bir dildir. Örneğin, "x" ve "X" değişkenleri birbirinden farklılardır.
+% rand fonksiyonu kullanılarak rastgele matrisler oluşturulabilir. Örneğin;
+A = rand(3)
+
+A =
+
+    0.8147    0.9134    0.2785
+    0.9058    0.6324    0.5469
+    0.1270    0.0975    0.9575
+
+% 3'e 3'lük rastgele bir matris oluşturulup bir A değişkenine atadık.  
+% inv fonksiyonu A'nın tersini alır. 
+inv(A)
+
+ans =
+
+   -1.9958    3.0630   -1.1690
+    2.8839   -2.6919    0.6987
+   -0.0291   -0.1320    1.1282
+
+% Ters matris ile orijinal matris çarpıldığında bir birim matris oluşur.
+ans * A
+
+ans =
+
+    1.0000    0.0000         0
+   -0.0000    1.0000   -0.0000
+    0.0000    0.0000    1.0000
+
+% Artı veya eksi 0.0000 olarak görüntülenen köşegen dışı elemanlar aslında tam olarak 0 değildir. MATLAB, sayıları yaklaşık 16 
+% ondalık basamak hassasiyetinde saklar ve hesapalr. Sayıları varsayılan olarak 5 basamaklı bir fixed point format ( sabit noktalı 
+% format) şeklinde görüntüler. Bu format aynı zamanda scientific notstion (bilimsel gösterim) veya exponental notation (üssel gösterim)
+% olarak da bilinir.
+format short e
+ans
+
+ans =
+
+   1.0000e+00   1.1102e-16            0
+  -4.9960e-16   1.0000e+00  -1.1102e-16
+   2.7756e-17   1.3878e-17   1.0000e+00
+
+% Şimdi köşegen dışı elemanların nonzero olduğunu (sıfır olmadığını) ancak çok küçük olduğunu görmüş olduk. Bu rounding errors
+% (yuvarlama hatalarının) bir sonucudur. Default format, format short veya format yazılarak eski haline döndürülebilir.
+% format komutunun "help format" yazılarak görülebilecek birçok seçeneği vardır.
+help format
+ <strong>format</strong> - Set output display format
+    This MATLAB function changes the output display format to the format
+    specified by style.
+
+    Syntax
+      <strong>format</strong>(style)
+
+      fmt = <strong>format</strong>
+      fmt = <strong>format</strong>(style)
+
+    Input Arguments
+      <a href="matlab:web('C:\Program Files\MATLAB\R2025a\help/matlab/ref/format.html#btiwmh5-1-style')">style</a> - Format to apply
+        character vector | string scalar | DisplayFormatOptions object
+
+    Output Arguments
+      <a href="matlab:web('C:\Program Files\MATLAB\R2025a\help/matlab/ref/format.html#mw_3eb76f23-845a-4266-9320-19dbc1994756')">fmt</a> - Current display format
+        DisplayFormatOptions object
+
+    Examples
+      <a href="matlab:openExample('matlab/ChangeCurrentFormatExample')">Long Format</a>
+      <a href="matlab:openExample('matlab/DisplayValuesinDefaultandHexadecimalFormatExample')">Hexadecimal Format</a>
+      <a href="matlab:openExample('matlab/DifferenceBetweenShortandLongEngineeringNotationExample')">Short and Long Engineering Notation</a>
+      <a href="matlab:openExample('matlab/DisplayLargeDataRangeUsingshortgFormatExample')">Large Data Range Format</a>
+      <a href="matlab:web('C:\Program Files\MATLAB\R2025a\help/matlab/ref/format.html#mw_5f3d66eb-5e13-4517-8573-e60f3f48169c')">Reset Format to Default</a>
+      <a href="matlab:openExample('matlab/GetCurrentFormatExample')">Get Current Format</a>
+      <a href="matlab:openExample('matlab/SaveAndRestoreDisplayFormatExample')">Save and Restore Display Format</a>
+
+    See also <a href="matlab:help matlab.display.DisplayFormatOptions -displayBanner">DisplayFormatOptions</a>, <a href="matlab:help disp -displayBanner">disp</a>, <a href="matlab:help fprintf -displayBanner">fprintf</a>, <a href="matlab:help formattedDisplayText -displayBanner">formattedDisplayText</a>
+
+    Introduced in MATLAB before R2006a
+    <a href="matlab:doc format">Documentation for format</a>
+
+% Genel olarak "help foo" komutu foo adındaki komut veya fonksiyon hakkında bilgi görüntüler. 
+%------------------------------------------------------------------------------------------------------------------------
+% MATLAB'DE YARDIM ALMA YÖNTEMLERİ
+% Aradığın komut veya konu hakkında bilgi almanın birkaç yolu vardır:
+% 1. help [fonksiyon_adı]: (ör: help sqrt) 
+% Komut penceresi içerisinde hızlı vce özet bir yardım metni gösterir. Fonksiyonun ne yaptığını ve nasıl kullanıldığını kısaca anlatır.
+help sqrt
+--- help for <strong>sqrt</strong> ---
+
+ <strong>sqrt</strong> - Square root
+    This MATLAB function returns the square root of each element of the
+    array X.
+
+    Syntax
+      B = <strong>sqrt</strong>(X)
+
+    Input Arguments
+      <a href="matlab:web('C:\Program Files\MATLAB\R2025a\help/matlab/ref/double.sqrt.html#bu57a5h-X')">X</a> - Input array
+        scalar | vector | matrix | multidimensional array | table |
+        timetable
+
+    Examples
+      <a href="matlab:openExample('matlab/SquareRootOfVectorElementsExample')">Square Root of Vector Elements</a>
+
+    See also <a href="matlab:help nthroot -displayBanner">nthroot</a>, <a href="matlab:help sqrtm -displayBanner">sqrtm</a>, <a href="matlab:help realsqrt -displayBanner">realsqrt</a>
+
+    Introduced in MATLAB before R2006a
+    <a href="matlab:doc sqrt">Documentation for sqrt</a>
+    <a href="matlab:matlab.lang.internal.introspective.overloads.displayOverloads('sqrt')">Other uses of sqrt</a>
+
+% 2. doc [fonksiyon_adı]: (ör: doc sqrt)
+% Fonksiyon için detaylı dökümantasyonu "Help Browser" denilen ayrı bir pencerede açar. Örnekler, açıklamalar ve ilgili fonksiyon 
+% linklerini içerir.
+doc sqrt
+% 3. lookfor [anahtar_kelime]: (ör: lookfor elliptic)
+% Adını tam bilmediğin bir fonksiyonu aramak için kullanılır. MATLAB bu anahtar kelimenin geçtiği tüm fonksiyonların yardım
+% özetlerini (ilk satırlarını) tarar ve listeler. 
+lookfor elliptic
+<a href="matlab:help ellipj -displayBanner">ellipj</a>                         - Jacobi <strong>elliptic</strong> functions
+<a href="matlab:help ellipke -displayBanner">ellipke</a>                        - Complete <strong>elliptic</strong> integrals of first and second kind
+<a href="matlab:help pdepe -displayBanner">pdepe</a>                          - Solve 1-D parabolic and <strong>elliptic</strong> PDEs
+
+% 4. docsearch('ifade')
+% Tüm MATLAB dökümantasyonu içinde tam metin araması yapar. lookfor' dan daha kapsamlıdır.
+% NOT!!!: Yardım metinlerinde fonksiyon adları (ör:SQRT) okunabilirlik için büyük harfle yazılabilir ancak komut olarak daima küçük 
+% harfle yazılmalıdır (ör.sqrt). Çünkü MATLAB case sensitive' dir.
+%----------------------------------------------------------------------------------------------------------------------------------
+% Bir satır üç nokta ile bittiğinde bir sonraki satırda komut girmeye devam edilmesi gerekir. Tek satıra sığmayacak işlemlerde kullanılır.
+x = 1 + 1/2 + 1/3 + 1/4 + 1/5 ...
+1/6 + 1/7 + 1/8 + 1/9 + 1/10
+ 1/6 + 1/7 + 1/8 + 1/9 + 1/10
+ ↑
+{Invalid expression. Check for missing multiplication operator, missing or unbalanced delimiters, or other syntax error. To construct
+matrices, use brackets instead of parentheses.
+} 
+% 1/5' ten sonra "+" koymayı unutmuşum. 
+ x = 1 + 1/2 + 1/3 + 1/4 + 1/5 ...
++ 1/6 + 1/7 + 1/8 + 1/9 + 1/10
+
+x =
+
+   2.9290e+00
+
+format 
+x
+
+x =
+
+    2.9290
+
+% x'in değeri (2.9290) şunu kanıtlıyor:
+% Diğer bazı programlama dillerinin aksine MATLAB'de tamsayılarla bir aritmetik işlem yapıldığında ve sonucu ondalıklı çıktığında 
+% MATLAB otomatik olarak bu tür dönüşümünü kendisi yapar extra bir tanımlama yapmamıza gerek kalmaz.
+% Bazı fonksiyonlar (veya değişkenler) size special values sağlar: 
+% pi: pi sayısını (3.14159...) veriir.
+% i ve j: Her ikisi de sanal birim olan (-1)^(1/2)' yi temsil eder.
+% Karmaşık sayılar şu şekilde yazılabilir; 2-3i, 2-3*i, 2-3*sqrt(-1) veya complex(2,-3)
+% NOT!!!
+% Eğer i harfini (örneğin bir döngüde) farklı bir değişken olarak atarsanız (mesela i=10 yazarsanız), 2-3*i yazımı artık bir karmaşık
+% sayı vermez (çünkü i artık 10'dur.) Ancak 2-3i (arasında çarpma işareti olmadan) veya complex(2,-3) gibi diğer formlar bu durumdan
+% etkilenemz ve genellikle doğru sonucu (karmaşık sayıyı) üretir.
+% MATLAB'de dahili bir fonksiyon veya pi gibi özel bir sabit ile aynı ada sahip yeni bir değişken oluşturarak
+%o fonksiyonu/sabiti overriding(üzerine yazamk) mümkündür. (Örneğin pi=5 veya sin='merhaba' ataması yapmak)
+% Bu kafa karışıklığına yol açacağı için kesinlikle kaçınılması gereken bir durumdur. i ve j'nin (sanal sayı
+% anlamını unutup) döngü sayacı değişkenleri olarak for döngülerinde kullanılması (ör: i=1:10...) bu hatayı
+% yapmanın en yaygın yoludur.
+%--------------------------------------------------------------------------------------------------------------------------------------------
+% MATLAB karmaşık sayılarla yapılan aritmatik işlemlerde tam destek sunar. Bu destek, bir karmaşık sayı üzerinde
+% işlem yapan conj (sayının karmaşık eşleniğini bulma), real (sayının gerçel/reel kısmını alma) ve imag 
+% (sayının sanal/imajiner kısmını alma) gibi temel fonksiyonları da kapsar.
+w = (-1) ^ 0.25
+
+w =
+
+   0.7071 + 0.7071i
+
+z = conj(w)
+
+z =
+
+   0.7071 - 0.7071i
+
+[real(z) imag(z)]
+
+ans =
+
+    0.7071   -0.7071
+
+exp(i*pi)
+
+ans =
+
+  -1.0000 + 0.0000i
+
+%------------------------------------------------------------------------------------------------------------------------------
+% Workspace içindeki değişknelerin bir listesi who yazılarak elde edilebilirken, whos komutu her değişkenin
+% size(boyut), class(sınıf/tür) bilgilerini de gösterir.
+who
+
+Your variables are:
+
+ans  w    z    
+
+whos
+  Name      Size            Bytes  Class     Attributes
+
+  ans       1x1                16  double    complex   
+  w         1x1                16  double    complex   
+  z         1x1                16  double    complex   
+
+% clear: Workspace'deki tüm değişkenleri siler.
+% clear [değişken_adı]: Sadece adı yazılan değişkeni siler. (ör: clear x)
+%---------------------------------------------------------------------------------------------------------------------------------
+% DEĞİŞKEN İNCELEME VE DÜZENLEME 
+% Workspace Browser: MATLAB arayüzünde değişkenlkeri whos gibi listeleyen görsel penceredir.
+% Array Editor: Değişkenleri bir excel sayfası gibi (spreadsheet format) görmeni ve manuel olarak düzenlemeni
+% sağlar. İki türlü açılabilir:
+% 1. Workspace penceresindeki değişkenin üzerine çift tıklayarak 
+% 2. Command Window'a openvar('değişken_adı') yazarak. (ör: openvar('A))
+% DEĞİŞKEN ADLANDIRMA KURALLARI
+% Case Sensitive: "A" değişkeni ile "a" değişkeni farklıdır.
+% Mutlaka bir harf ile başlamalıdır.
+% İlk harften sonra harf, rakam veya altçizgi içerebilir. (Boşluk, tire, özel karakter içeremez.)
+% namelengthmax komutu, bir değişken adının en fazla kaç karakter olabileceğini gösterir. (Genellikle 63)
+namelengthmax
+
+ans =
+
+        2048
+
+%----------------------------------------------------------------------------------------------------------
+% DEĞİŞKENLERİ KAYDETME VE YÜKLEME (.mat DOSYALARI)
+% save [dosya_adı]: (ör: save my_data)
+% Workspace'deki tüm değişkenleri my_data.mat adlı bir dosyaya kaydeder.
+% save [dosya_adı] [değiken1] [değişken2]
+% save [dosya_adı] [değiken1] [değişken2]
+% (ör: save my_data A x) 
+% Sadece A ve x değişkenlerini my_data.mat dosyasına kaydeder.
+% load [dosya_adı] (ör: load my_data)
+% my_data.mat dosyasındaki tüm değişkenleri Workspace'e geri yükler.
+%--------------------------------------------------------------------------------------------------------
+% diary komutu, Command Window'da gördüğün her şeyi (yazdığın komutları ve aldığın çıktıları) bir metin dosyasına
+% kaydetmeni sağlar.
+% 1. diary dosya_adim.txt : Kayıt tutmayı başlatır. Her şeyi dosya_adim.txt (veya her ne ad verildiyse) içine
+% yazmaya başlar.
+% 2. diary off : Kaydı durdurur.
+% 3. diary on: Durdurulan kaydı aynı dosyaya devam ettirir, kaldığı yerden ekleme yapar.
+%---------------------------------------------------------------------------------------------------------
+% Bir değişkenin değerini başında A= veya ans= yazısı olmadan göstermek için disp komutu kullanılır. Normalde;
+A = eye(2)
+
+A =
+
+     1     0
+     0     1
+
+disp(A)
+     1     0
+     0     1
+
+% uiimport, bu komut Import Wizard(içe aktarma sihirbazı) den,len bir menü açar. Bu menü, Excel(.xlsx), metin
+% (.txt) veya CSV (.csv) gibi dış dosyalardan MATLAB'e kolayca aktarılmasını sağlar.
+diary off
