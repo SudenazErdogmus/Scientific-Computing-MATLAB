@@ -1,0 +1,12 @@
+/%
+Covering some basic topics I haven't seen elsewhere on Cody.
+
+Given an input matrix, generate an output matrix that consists of the input matrix replicated in a 2 by 2 pattern Examples:
+
+[1] -> [1 1
+        1 1]
+[1 2       -> [1 2 1 2
+ 3 4]          3 4 3 4 
+               1 2 1 2 
+               3 4 3 4]
+               
