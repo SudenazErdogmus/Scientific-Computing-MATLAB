@@ -23,3 +23,16 @@ function b = isItSquared(a)
    end
 end
 
+% Alternative Solution
+%{
+function b = isItSquared(a)
+    b = any(ismember(a, a.^2));
+end
+}
+
+
+
+
+
+
+
