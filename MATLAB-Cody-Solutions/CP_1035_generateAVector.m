@@ -14,3 +14,9 @@ function ans = your_fcn_name(n)
   end
 end
 
+% Alternative Solution
+%{
+function ans = your_fcn_name(n)
+    ans = repelem(1:n, 1:n);
+end
+%}
